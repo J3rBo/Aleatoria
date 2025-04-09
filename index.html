@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</title>
+    <style>
+        :root {
+            --primary-color: #2C8B89;
+            --secondary-color: #D0BB81;
+            --light-color: #F7F3E9;
+            --dark-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .secondary-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #388E3C;
+        }
+        
+        .error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #D32F2F;
+        }
+        
+        /* Estilos para el formulario de registro */
+        #registerForm {
+            display: none;
+        }
+        
+        .form-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .back-btn {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Aleatoria" class="logo">
+        </div>
+        
+        <h1>REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</h1>
+        
+        <!-- Formulario de Login -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsuario">Usuario</label>
+                <input type="text" id="loginUsuario" name="usuario" placeholder="Introduzca su nombre de usuario" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Introduzca su contraseña" required>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="primary-btn">Acceder</button>
+                <button type="button" id="showRegister" class="secondary-btn">Registro</button>
+            </div>
+            
+            <div id="loginMessage" class="message"></div>
+        </form>
+        
+        <!-- Formulario de Registro -->
+        <form id="registerForm">
+            <div class="form-title">Crear nueva cuenta</div>
+            
+            <div class="form-group">
+                <label for="regUsuario">Usuario</label>
+                <input type="text" id="regUsuario" name="usuario" placeholder="Elija un nombre de usuario" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" name="email" placeholder="Introduzca su email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Contraseña</label>
+                <input type="password" id="regPassword" name="password" placeholder="Elija una contraseña" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regConfirmPassword">Confirmar Contraseña</label>
+                <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Repita su contraseña" required>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="primary-btn">Crear Cuenta</button>
+            </div>
+            
+            <div class="back-btn" id="backToLogin">Volver al inicio de sesión</div>
+            
+            <div id="registerMessage" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // Referencias a elementos del DOM
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegisterBtn = document.getElementById('showRegister');
+        const backToLoginBtn = document.getElementById('backToLogin');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+
+        // Simulación de base de datos de usuarios para el MVP
+        const users = [
+            { username: 'admin', password: 'admin123', email: 'admin@aleatoria.gov' }
+        ];
+
+        // Mostrar formulario de registro
+        showRegisterBtn.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        // Volver al formulario de login
+        backToLoginBtn.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Procesamiento del formulario de login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsuario').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Validación simple
+            if (!username || !password) {
+                showMessage(loginMessage, 'Por favor, complete todos los campos', 'error');
+                return;
+            }
+            
+            // Comprobar credenciales
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, 'Inicio de sesión exitoso. Redirigiendo...', 'success');
+                
+                // Simulación de redireccionamiento después del login exitoso (para el MVP)
+                setTimeout(() => {
+                    alert('Login exitoso!\nEn una aplicación real, serías redirigido a la página principal.');
+                    // window.location.href = 'dashboard.html'; // En una versión real
+                }, 1500);
+            } else {
+                showMessage(loginMessage, 'Usuario o contraseña incorrectos', 'error');
+            }
+        });
+
+        // Procesamiento del formulario de registro
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('regUsuario').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Validaciones
+            if (!username || !email || !password || !confirmPassword) {
+                showMessage(registerMessage, 'Por favor, complete todos los campos', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, 'Las contraseñas no coinciden', 'error');
+                return;
+            }
+            
+            // Comprobar si el usuario ya existe
+            if (users.some(u => u.username === username)) {
+                showMessage(registerMessage, 'Este nombre de usuario ya está en uso', 'error');
+                return;
+            }
+            
+            // Añadir el nuevo usuario (en una app real, esto se haría en el servidor)
+            users.push({ username, password, email });
+            
+            showMessage(registerMessage, 'Cuenta creada con éxito. Ya puede iniciar sesión.', 'success');
+            
+            // Limpiar campos
+            document.getElementById('regUsuario').value = '';
+            document.getElementById('regEmail').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regConfirmPassword').value = '';
+            
+            // Volver al login después de 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }, 2000);
+        });
+
+        // Función para mostrar mensajes
+        function showMessage(element, message, type) {
+            element.textContent = message;
+            element.className = `message ${type}`;
+            element.style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
