@@ -250,33 +250,32 @@
         });
 
         // Procesamiento del formulario de login
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('loginUsuario').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Validación simple
-            if (!username || !password) {
-                showMessage(loginMessage, 'Por favor, complete todos los campos', 'error');
-                return;
-            }
-            
-            // Comprobar credenciales
-            const user = users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                showMessage(loginMessage, 'Inicio de sesión exitoso. Redirigiendo...', 'success');
-                
-                // Simulación de redireccionamiento después del login exitoso (para el MVP)
-                setTimeout(() => {
-                    alert('Login exitoso!\nEn una aplicación real, serías redirigido a la página principal.');
-                    // window.location.href = 'dashboard.html'; // En una versión real
-                }, 1500);
-            } else {
-                showMessage(loginMessage, 'Usuario o contraseña incorrectos', 'error');
-            }
-        });
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('loginUsuario').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // Validación simple
+    if (!username || !password) {
+        showMessage(loginMessage, 'Por favor, complete todos los campos', 'error');
+        return;
+    }
+    
+    // Comprobar credenciales
+    const user = users.find(u => u.username === username && u.password === password);
+    
+    if (user) {
+        showMessage(loginMessage, 'Inicio de sesión exitoso. Redirigiendo...', 'success');
+        
+        // Redireccionamiento real al dashboard después del login exitoso
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 1500);
+    } else {
+        showMessage(loginMessage, 'Usuario o contraseña incorrectos', 'error');
+    }
+});
 
         // Procesamiento del formulario de registro
         registerForm.addEventListener('submit', (e) => {
