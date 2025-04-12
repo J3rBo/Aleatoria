@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</title>
+    <style>
+        :root {
+            --primary-color: #2C8B89;
+            --secondary-color: #D0BB81;
+            --light-color: #F7F3E9;
+            --dark-color: #333;
+            --accent-color: #1F6665;
+            --light-grey: #f5f5f5;
+            --medium-grey: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .logo {
+            width: 70px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Button row styles */
+        .button-row {
+            background-color: var(--light-grey);
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid var(--medium-grey);
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn svg {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-info {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Content area styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            min-height: 500px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #777;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        /* User info styles */
+        .user-info {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-name {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        /* Estilos mejorados para la tabla */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        thead {
+            background-color: #2C8B89;
+            color: white;
+        }
+
+        th {
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Estilos para las etiquetas de estado */
+        .status-badge {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .status-pending {
+            background-color: #FEF9C3;
+            color: #CA8A04;
+        }
+
+        .status-review {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .status-completed {
+            background-color: #DCFCE7;
+            color: #16A34A;
+        }
+
+        /* Estilos para los botones de acción */
+        .actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background-color: #2C8B89;
+            color: white;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .button-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .user-info {
+                margin-top: 15px;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            h1 {
+                margin-top: 10px;
+            }
+            
+            .logo {
+                margin-right: 0;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado con logo y título -->
+    <header>
+        <img src="logo.png" alt="Logo Aleatoria" class="logo">
+        <h1>REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</h1>
+        <div class="user-info">
+            <span class="user-name">admin</span>
+            <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
+        </div>
+    </header>
+    
+    <!-- Fila de botones de acción -->
+    <div class="button-row">
+        <button class="btn btn-primary" id="refreshBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+            </svg>
+            Actualizar
+        </button>
+        <button class="btn btn-success" id="createBtn" onclick="window.open('crear_incidencia.html', '_blank')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Crear Incidencia
+        </button>
+        <button class="btn btn-warning" id="modifyBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+            </svg>
+            Modificar Incidencia
+        </button>
+        <button class="btn btn-info" id="mapBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Mapa de Incidencias
+        </button>
+        <button class="btn btn-secondary" id="supportBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/>
+                <path d="M14.5 3.5a2.5 2.5 0 0 0-5 0V9h5V3.5Z"/>
+            </svg>
+            Apoyo Ciudadano
+        </button>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="dashboard-content" id="dashboardContent">
+            <!-- El contenido será cargado dinámicamente con JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Datos de usuario actual (para el MVP)
+        const currentUser = {
+            username: 'admin',
+            nombre: 'Admin',
+            apellidos: 'Usuario',
+            email: 'admin@aleatoria.gov'
+        };
+
+        // Simulación de datos de incidencias para el MVP
+        let incidencias = [
+            { 
+                id: 1, 
+                titulo: "Banco roto en Plaza Mayor", 
+                descripcion: "Listones de madera rotos en banco número 5", 
+                categoria: "Mobiliario urbano",
+                ubicacion: "Plaza Mayor", 
+                fecha: "2025-04-10 10:15", 
+                estado: "Pendiente", 
+                reportadoPor: "admin",
+                fotos: [] 
+            },
+            { 
+                id: 2, 
+                titulo: "Farola sin luz", 
+                descripcion: "Farola que no funciona desde hace una semana", 
+                categoria: "Alumbrado",
+                ubicacion: "Calle San Juan, 23", 
+                fecha: "2025-04-08 16:30", 
+                estado: "En revisión", 
+                reportadoPor: "admin",
+                fotos: [] 
+            },
+            { 
+                id: 3, 
+                titulo: "Papelera vandalizada", 
+                descripcion: "Papelera con pintadas y parcialmente arrancada", 
+                categoria: "Contenedores y limpieza",
+                ubicacion: "Parque Central, zona norte", 
+                fecha: "2025-04-11 08:45", 
+                estado: "Pendiente", 
+                reportadoPor: "vecino1",
+                fotos: [] 
+            }
+        ];
+
+        // Referencias a elementos del DOM
+        const dashboardContent = document.getElementById('dashboardContent');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const modifyBtn = document.getElementById('modifyBtn');
+        const mapBtn = document.getElementById('mapBtn');
+        const supportBtn = document.getElementById('supportBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Función para mostrar el estado vacío
+        function mostrarEstadoVacio() {
+            dashboardContent.innerHTML = `
+                <div class="empty-state">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2"/>
+                        <path d="M7 7h10M7 12h10M7 17h4"/>
+                    </svg>
+                    <h3>No hay incidencias para mostrar</h3>
+                    <p>Utiliza el botón "Actualizar" para cargar las incidencias disponibles o crea una nueva incidencia.</p>
+                    <button class="btn btn-primary" id="emptyRefreshBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                        Actualizar ahora
+                    </button>
+                </div>
+            `;
+            
+            // Añadir evento al botón de actualizar
+            document.getElementById('emptyRefreshBtn').addEventListener('click', mostrarIncidencias);
+        }
+
+        // Función para mostrar las incidencias
+        function mostrarIncidencias() {
+            // Obtener incidencias desde localStorage
+            let storedIncidencias = JSON.parse(localStorage.getItem('incidencias') || '[]');
+            
+            // Combinar con las incidencias predeterminadas
+            let todasIncidencias = [...incidencias];
+            
+            // Añadir las incidencias almacenadas si no están ya en la lista
+            storedIncidencias.forEach(inc => {
+                if (!todasIncidencias.some(i => i.id === inc.id)) {
+                    todasIncidencias.push(inc);
+                }
+            });
+            
+            // Si no hay incidencias, mostrar el estado vacío
+            if (todasIncidencias.length === 0) {
+                mostrarEstadoVacio();
+                return;
+            }
+            
+            // Limpiamos el contenido actual
+            dashboardContent.innerHTML = '';
+            
+            // Creamos la tabla para mostrar las incidencias
+            const table = document.createElement('table');
+            
+            // Creamos el encabezado de la tabla
+            const thead = document.createElement('thead');
+            thead.innerHTML = `
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Categoría</th>
+                    <th>Ubicación</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+            
+            // Creamos el cuerpo de la tabla
+            const tbody = document.createElement('tbody');
+            
+            // Añadimos cada incidencia a la tabla
+            todasIncidencias.forEach(incidencia => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${incidencia.id}</td>
+                    <td>${incidencia.titulo}</td>
+                    <td>${incidencia.categoria || '-'}</td>
+                    <td>${incidencia.ubicacion}</td>
+                    <td>${incidencia.fecha}</td>
+                    <td>
+                        <span class="status-badge ${
+                            incidencia.estado === 'Pendiente' ? 'status-pending' : 
+                            incidencia.estado === 'En revisión' ? 'status-review' : 
+                            incidencia.estado === 'Completada' ? 'status-completed' : ''
+                        }">${incidencia.estado}</span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn-action ver" data-id="${incidencia.id}" title="Ver detalles">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                        <button class="btn-action editar" data-id="${incidencia.id}" title="Editar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                            </svg>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            table.appendChild(tbody);
+            dashboardContent.appendChild(table);
+            
+            // Añadimos eventos a los botones de acciones
+            document.querySelectorAll('.btn-action.ver').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    alert(`Ver detalles de la incidencia #${id}`);
+                });
+            });
+            
+            document.querySelectorAll('.btn-action.editar').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    alert(`Editar incidencia #${id}`);
+                });
+            });
+        }
+
+        // Configuración de eventos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar el estado inicial (vacío)
+            mostrarEstadoVacio();
+            
+            // Configurar eventos de los botones
+            refreshBtn.addEventListener('click', mostrarIncidencias);
+            
+            modifyBtn.addEventListener('click', function() {
+                alert('Seleccione una incidencia para modificar');
+            });
+            
+            mapBtn.addEventListener('click', function() {
+                alert('Navegar al mapa de incidencias');
+            });
+            
+            supportBtn.addEventListener('click', function() {
+                alert('Navegar a la página de apoyo ciudadano');
+            });
+            
+            logoutBtn.addEventListener('click', function() {
+                alert('Cerrando sesión...');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
