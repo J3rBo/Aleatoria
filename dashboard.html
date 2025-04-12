@@ -403,7 +403,7 @@ function mostrarIncidencias() {
     // Obtener incidencias desde localStorage
     let storedIncidencias = JSON.parse(localStorage.getItem('incidencias') || '[]');
     
-    // Combinar con las incidencias predeterminadas si es necesario
+    // Combinar con las incidencias predeterminadas
     let todasIncidencias = [...incidencias];
     
     // Añadir las incidencias almacenadas si no están ya en la lista
@@ -434,7 +434,6 @@ function mostrarIncidencias() {
             <th>Categoría</th>
             <th>Ubicación</th>
             <th>Fecha</th>
-            <th>Riesgo</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -453,7 +452,6 @@ function mostrarIncidencias() {
             <td>${incidencia.categoria || '-'}</td>
             <td>${incidencia.ubicacion}</td>
             <td>${incidencia.fecha}</td>
-            <td>${incidencia.riesgo || '-'}</td>
             <td>
                 <span class="status-badge ${
                     incidencia.estado === 'Pendiente' ? 'status-pending' : 
@@ -495,6 +493,19 @@ function mostrarIncidencias() {
             alert(`Editar incidencia #${id}`);
         });
     });
+}
+
+// Asegurarnos de que el evento está asignado correctamente
+document.addEventListener('DOMContentLoaded', function() {
+    // Asignar el evento al botón de actualizar
+    document.getElementById('refreshBtn').addEventListener('click', mostrarIncidencias);
+    
+    // También podemos asignar el evento al botón de actualizar en el estado vacío
+    const emptyRefreshBtn = document.getElementById('emptyRefreshBtn');
+    if (emptyRefreshBtn) {
+        emptyRefreshBtn.addEventListener('click', mostrarIncidencias);
+    }
+});
 }
     </script>
 </body>
