@@ -176,18 +176,14 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
+            display: none; /* Cambiado de hidden a none para solucionar problemas de visibilidad */
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
         }
 
         .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+            display: flex; /* Cambiado de visible a flex para asegurar que aparezca correctamente */
         }
 
         .modal {
@@ -198,13 +194,6 @@
             max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 0;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active .modal {
-            transform: translateY(0);
         }
 
         .modal-header {
@@ -235,11 +224,6 @@
             align-items: center;
             justify-content: center;
             padding: 0;
-            transition: all 0.2s ease;
-        }
-
-        .close-modal:hover {
-            transform: scale(1.1);
         }
 
         .modal-body {
@@ -277,11 +261,6 @@
             font-size: 14px;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
         textarea.form-control {
             min-height: 120px;
             resize: vertical;
@@ -301,25 +280,10 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .file-upload:hover {
-            border-color: var(--primary-color);
         }
 
         .file-upload input {
             display: none;
-        }
-
-        .file-upload svg {
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .file-upload p {
-            color: #777;
-            margin: 0;
         }
 
         .file-preview {
@@ -431,11 +395,6 @@
             justify-content: center;
             color: var(--primary-color);
             border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action:hover {
-            background-color: var(--light-grey);
         }
 
         /* Responsive styles */
@@ -676,28 +635,6 @@
             }
         ];
 
-        // Variables para el DOM
-        const dashboardContent = document.getElementById('dashboardContent');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const createBtn = document.getElementById('createBtn');
-        const modifyBtn = document.getElementById('modifyBtn');
-        const mapBtn = document.getElementById('mapBtn');
-        const supportBtn = document.getElementById('supportBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        
-        // Variables para el modal
-        const createIncidenceModal = document.getElementById('createIncidenceModal');
-        const closeModal = document.getElementById('closeModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const submitIncidenceBtn = document.getElementById('submitIncidenceBtn');
-        const incidenceForm = document.getElementById('incidenceForm');
-        const fileInput = document.getElementById('fotos');
-        const dropArea = document.getElementById('dropArea');
-        const filePreview = document.getElementById('filePreview');
-        
-        // Array para almacenar los archivos seleccionados
-        let selectedFiles = [];
-
         // Función para mostrar el estado vacío
         function mostrarEstadoVacio() {
             dashboardContent.innerHTML = `
@@ -838,12 +775,12 @@
             selectedFiles = [];
             
             // Mostrar el modal
-            createIncidenceModal.classList.add('active');
+            document.getElementById('createIncidenceModal').classList.add('active');
         }
 
         // Función para cerrar el modal
         function cerrarModal() {
-            createIncidenceModal.classList.remove('active');
+            document.getElementById('createIncidenceModal').classList.remove('active');
         }
 
         // Función para previsualizar archivos
@@ -935,34 +872,66 @@
             alert('Incidencia creada con éxito');
         }
 
-        // Event Listeners
+        // Array para almacenar los archivos seleccionados
+        let selectedFiles = [];
+
+        // Esperar a que el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencias a los elementos del DOM
+            const dashboardContent = document.getElementById('dashboardContent');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const createBtn = document.getElementById('createBtn');
+            const modifyBtn = document.getElementById('modifyBtn');
+            const mapBtn = document.getElementById('mapBtn');
+            const supportBtn = document.getElementById('supportBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            const createIncidenceModal = document.getElementById('createIncidenceModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const submitIncidenceBtn = document.getElementById('submitIncidenceBtn');
+            const fileInput = document.getElementById('fotos');
+            const dropArea = document.getElementById('dropArea');
+            const filePreview = document.getElementById('filePreview');
+
             // Mostrar el estado inicial (vacío)
             mostrarEstadoVacio();
             
-            // Botones principales
+            // Configurar eventos de los botones
             refreshBtn.addEventListener('click', mostrarIncidencias);
-            createBtn.addEventListener('click', mostrarModalCrearIncidencia);
-            modifyBtn.addEventListener('click', () => alert('Seleccione una incidencia para modificar'));
-            mapBtn.addEventListener('click', () => alert('Navegar al mapa de incidencias'));
-            supportBtn.addEventListener('click', () => alert('Navegar a la página de apoyo ciudadano'));
-            logoutBtn.addEventListener('click', () => {
+            
+            createBtn.addEventListener('click', function() {
+                mostrarModalCrearIncidencia();
+            });
+            
+            modifyBtn.addEventListener('click', function() {
+                alert('Seleccione una incidencia para modificar');
+            });
+            
+            mapBtn.addEventListener('click', function() {
+                alert('Navegar al mapa de incidencias');
+            });
+            
+            supportBtn.addEventListener('click', function() {
+                alert('Navegar a la página de apoyo ciudadano');
+            });
+            
+            logoutBtn.addEventListener('click', function() {
                 alert('Cerrando sesión...');
                 window.location.href = 'index.html';
             });
             
-            // Modal
+            // Configurar eventos del modal
             closeModal.addEventListener('click', cerrarModal);
             cancelBtn.addEventListener('click', cerrarModal);
             submitIncidenceBtn.addEventListener('click', crearIncidencia);
             
-            // Prevenir el cierre del modal al hacer clic en él
-            document.querySelector('.modal').addEventListener('click', function(e) {
-                e.stopPropagation();
+            // Manejo de clicks dentro y fuera del modal
+            createIncidenceModal.addEventListener('click', function(e) {
+                if (e.target === createIncidenceModal) {
+                    cerrarModal();
+                }
             });
-            
-            // Cerrar el modal al hacer clic fuera de él
-            createIncidenceModal.addEventListener('click', cerrarModal);
             
             // Manejo de archivos
             fileInput.addEventListener('change', function() {
@@ -972,7 +941,7 @@
             // Drag and drop para los archivos
             dropArea.addEventListener('dragover', function(e) {
                 e.preventDefault();
-                this.style.borderColor = var(--primary-color);
+                this.style.borderColor = '#2C8B89';
             });
             
             dropArea.addEventListener('dragleave', function() {
