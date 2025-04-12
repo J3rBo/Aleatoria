@@ -3,425 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</title>
+    <title>Dashboard - REGISTRO DE INCIDENCIAS</title>
     <style>
-        :root {
-            --primary-color: #2C8B89;
-            --secondary-color: #D0BB81;
-            --light-color: #F7F3E9;
-            --dark-color: #333;
-            --accent-color: #1F6665;
-            --light-grey: #f5f5f5;
-            --medium-grey: #e0e0e0;
-        }
-        
+        /* Estilos básicos */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background-color: var(--light-color);
-            min-height: 100vh;
+            background-color: #f7f3e9;
+            padding: 20px;
         }
-
-        /* Header styles */
+        
         header {
             background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px 20px;
+            padding: 15px;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
+        
         .logo {
-            width: 70px;
-            height: auto;
-            margin-right: 20px;
+            width: 60px;
+            margin-right: 15px;
         }
-
+        
         h1 {
-            color: var(--primary-color);
             font-size: 18px;
-            font-weight: bold;
+            color: #2c8b89;
         }
-
-        /* Button row styles */
+        
         .button-row {
-            background-color: var(--light-grey);
-            padding: 15px 20px;
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
-            border-bottom: 1px solid var(--medium-grey);
+            margin-bottom: 20px;
         }
-
+        
         .btn {
             padding: 10px 15px;
             border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 14px;
+            border-radius: 4px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
+            font-weight: bold;
         }
-
-        .btn svg {
-            margin-right: 8px;
-        }
-
+        
         .btn-primary {
-            background-color: var(--primary-color);
+            background-color: #2c8b89;
             color: white;
         }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-info {
-            background-color: #3498db;
-            color: white;
-        }
-
+        
         .btn-success {
             background-color: #2ecc71;
             color: white;
         }
-
-        .btn-warning {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* Content area styles */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
+        
         .dashboard-content {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+        
+        /* Estilos para el modal */
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
             justify-content: center;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #777;
-        }
-
-        .empty-state img {
-            width: 120px;
-            margin-bottom: 20px;
-            opacity: 0.7;
-        }
-
-        .empty-state h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .empty-state p {
-            font-size: 16px;
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
-
-        /* User info styles */
-        .user-info {
-            margin-left: auto;
-            display: flex;
             align-items: center;
+            z-index: 1000;
         }
-
-        .user-name {
-            margin-right: 15px;
-            font-weight: 500;
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 5px;
+            overflow: hidden;
         }
-
-        .logout-btn {
-            color: var(--primary-color);
+        
+        .modal-header {
+            background-color: #2c8b89;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .close {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
             background: none;
             border: none;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: underline;
         }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .button-row {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .user-info {
-                margin-top: 15px;
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            h1 {
-                margin-top: 10px;
-            }
-            
-            .logo {
-                margin-right: 0;
-            }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        textarea {
+            height: 100px;
+        }
+        
+        /* Mensaje emergente para errores */
+        .toaster {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2c8b89;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: none;
+            z-index: 1100;
         }
     </style>
 </head>
 <body>
-    <!-- Encabezado con logo y título -->
     <header>
-        <img src="logo.png" alt="Logo Aleatoria" class="logo">
+        <img src="logo.png" alt="Logo" class="logo">
         <h1>REGISTRO DE INCIDENCIAS EN MOBILIARIO URBANO</h1>
-        <div class="user-info">
-            <span class="user-name">admin</span>
-            <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
-        </div>
     </header>
     
-    <!-- Fila de botones de acción -->
     <div class="button-row">
-        <button class="btn btn-primary" id="refreshBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
-            </svg>
-            Actualizar
-        </button>
-        <button class="btn btn-success" id="createBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M5 12h14"/>
-            </svg>
-            Crear Incidencia
-        </button>
-        <button class="btn btn-warning" id="modifyBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-            </svg>
-            Modificar Incidencia
-        </button>
-        <button class="btn btn-info" id="mapBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-            </svg>
-            Mapa de Incidencias
-        </button>
-        <button class="btn btn-secondary" id="supportBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/>
-                <path d="M14.5 3.5a2.5 2.5 0 0 0-5 0V9h5V3.5Z"/>
-            </svg>
-            Apoyo Ciudadano
-        </button>
+        <button class="btn btn-primary" id="refreshBtn">Actualizar</button>
+        <button class="btn btn-success" id="createBtn">Crear Incidencia</button>
     </div>
     
-    <!-- Contenido principal -->
-    <div class="container">
-        <div class="dashboard-content" id="dashboardContent">
-            <!-- Estado vacío inicial -->
-            <div class="empty-state">
-                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="18" height="18" x="3" y="3" rx="2"/>
-                    <path d="M7 7h10M7 12h10M7 17h4"/>
-                </svg>
-                <h3>No hay incidencias para mostrar</h3>
-                <p>Utiliza el botón "Actualizar" para cargar las incidencias disponibles o crea una nueva incidencia.</p>
-                <button class="btn btn-primary" id="emptyRefreshBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
-                    </svg>
-                    Actualizar ahora
-                </button>
+    <div class="dashboard-content" id="content">
+        <p>No hay incidencias para mostrar. Pulse "Actualizar" para ver las incidencias o "Crear Incidencia" para añadir una nueva.</p>
+    </div>
+    
+    <!-- Modal para crear incidencia -->
+    <div id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nueva Incidencia</h2>
+                <button class="close" id="closeBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="incidenceForm">
+                    <div class="form-group">
+                        <label for="fecha">Fecha y Hora</label>
+                        <input type="text" id="fecha" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ciudadano">Ciudadano</label>
+                        <input type="text" id="ciudadano" value="admin" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="titulo">Título de la Incidencia*</label>
+                        <input type="text" id="titulo" placeholder="Título breve" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción*</label>
+                        <textarea id="descripcion" placeholder="Describa el problema" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Categoría*</label>
+                        <select id="categoria" required>
+                            <option value="" disabled selected>Seleccione categoría</option>
+                            <option value="Mobiliario urbano">Mobiliario urbano</option>
+                            <option value="Alumbrado">Alumbrado</option>
+                            <option value="Aceras y calzadas">Aceras y calzadas</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación*</label>
+                        <input type="text" id="ubicacion" placeholder="Dirección o ubicación" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="cancelBtn">Cancelar</button>
+                <button class="btn btn-primary" id="submitBtn">Enviar</button>
             </div>
         </div>
     </div>
-
+    
+    <div class="toaster" id="toaster"></div>
+    
     <script>
-        // Simulación de datos de incidencias para el MVP
-        const incidencias = [
-            { 
-                id: 1, 
-                titulo: "Banco roto en Plaza Mayor", 
-                descripcion: "Listones de madera rotos en banco número 5", 
-                ubicacion: "Plaza Mayor", 
-                fecha: "2025-04-10", 
-                estado: "Pendiente", 
-                reportadoPor: "admin" 
-            },
-            { 
-                id: 2, 
-                titulo: "Farola sin luz", 
-                descripcion: "Farola que no funciona desde hace una semana", 
-                ubicacion: "Calle San Juan, 23", 
-                fecha: "2025-04-08", 
-                estado: "En revisión", 
-                reportadoPor: "admin" 
-            },
-            { 
-                id: 3, 
-                titulo: "Papelera vandalizada", 
-                descripcion: "Papelera con pintadas y parcialmente arrancada", 
-                ubicacion: "Parque Central, zona norte", 
-                fecha: "2025-04-11", 
-                estado: "Pendiente", 
-                reportadoPor: "vecino1" 
-            }
-        ];
-
-        // Variables para el DOM
-        const dashboardContent = document.getElementById('dashboardContent');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const emptyRefreshBtn = document.getElementById('emptyRefreshBtn');
-        const createBtn = document.getElementById('createBtn');
-        const modifyBtn = document.getElementById('modifyBtn');
-        const mapBtn = document.getElementById('mapBtn');
-        const supportBtn = document.getElementById('supportBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        // Función para mostrar las incidencias
-        function mostrarIncidencias() {
-            // Limpiamos el contenido actual
-            dashboardContent.innerHTML = '';
+        // Esperar a que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias al DOM
+            const modal = document.getElementById('modal');
+            const createBtn = document.getElementById('createBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const toaster = document.getElementById('toaster');
             
-            // Creamos la tabla para mostrar las incidencias
-            const table = document.createElement('table');
-            table.style.width = '100%';
-            table.style.borderCollapse = 'collapse';
-            table.style.marginTop = '20px';
+            // Abrir modal
+            createBtn.onclick = function() {
+                // Establecer fecha actual
+                const now = new Date();
+                document.getElementById('fecha').value = now.toLocaleString('es-ES', { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Mostrar modal
+                modal.style.display = 'flex';
+                
+                // Mostrar mensaje para depuración
+                showToaster('Modal abierto correctamente');
+            };
             
-            // Creamos el encabezado de la tabla
-            const thead = document.createElement('thead');
-            thead.innerHTML = `
-                <tr style="background-color: var(--light-grey);">
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">ID</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Título</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Ubicación</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Fecha</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Estado</th>
-                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Acciones</th>
-                </tr>
-            `;
-            table.appendChild(thead);
+            // Cerrar modal (botón X)
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            };
             
-            // Creamos el cuerpo de la tabla
-            const tbody = document.createElement('tbody');
+            // Cerrar modal (botón Cancelar)
+            cancelBtn.onclick = function() {
+                modal.style.display = 'none';
+            };
             
-            // Añadimos cada incidencia a la tabla
-            incidencias.forEach(incidencia => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.id}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.titulo}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.ubicacion}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.fecha}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">
-                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; background-color: ${
-                            incidencia.estado === 'Pendiente' ? '#FEF9C3' : 
-                            incidencia.estado === 'En revisión' ? '#DBEAFE' : 
-                            incidencia.estado === 'Completada' ? '#DCFCE7' : '#F3F4F6'
-                        }; color: ${
-                            incidencia.estado === 'Pendiente' ? '#CA8A04' : 
-                            incidencia.estado === 'En revisión' ? '#2563EB' : 
-                            incidencia.estado === 'Completada' ? '#16A34A' : '#4B5563'
-                        };">${incidencia.estado}</span>
-                    </td>
-                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">
-                        <button class="btn-action ver" data-id="${incidencia.id}" style="background: none; border: none; color: #3498db; cursor: pointer; margin-right: 5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                                <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                        </button>
-                        <button class="btn-action editar" data-id="${incidencia.id}" style="background: none; border: none; color: #f39c12; cursor: pointer; margin-right: 5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-                            </svg>
-                        </button>
-                    </td>
+            // Cerrar modal al hacer clic fuera
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            };
+            
+            // Enviar formulario
+            submitBtn.onclick = function() {
+                const titulo = document.getElementById('titulo').value;
+                const descripcion = document.getElementById('descripcion').value;
+                const categoria = document.getElementById('categoria').value;
+                const ubicacion = document.getElementById('ubicacion').value;
+                
+                if (!titulo || !descripcion || !categoria || !ubicacion) {
+                    showToaster('Por favor, complete todos los campos obligatorios');
+                    return;
+                }
+                
+                // Simular creación exitosa
+                modal.style.display = 'none';
+                showToaster('Incidencia creada con éxito');
+                
+                // Actualizar contenido
+                document.getElementById('content').innerHTML = `
+                    <h3>Incidencia creada</h3>
+                    <p><strong>Título:</strong> ${titulo}</p>
+                    <p><strong>Categoría:</strong> ${categoria}</p>
+                    <p><strong>Ubicación:</strong> ${ubicacion}</p>
+                    <p><strong>Descripción:</strong> ${descripcion}</p>
                 `;
-                tbody.appendChild(tr);
-            });
+            };
             
-            table.appendChild(tbody);
-            dashboardContent.appendChild(table);
+            // Botón de actualizar
+            refreshBtn.onclick = function() {
+                document.getElementById('content').innerHTML = `
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Categoría</th>
+                                <th>Ubicación</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Banco roto en Plaza Mayor</td>
+                                <td>Mobiliario urbano</td>
+                                <td>Plaza Mayor</td>
+                                <td>Pendiente</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Farola sin luz</td>
+                                <td>Alumbrado</td>
+                                <td>Calle San Juan, 23</td>
+                                <td>En revisión</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+                
+                showToaster('Incidencias actualizadas');
+            };
             
-            // Añadimos eventos a los botones de acciones
-            document.querySelectorAll('.btn-action.ver').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    alert(`Ver detalles de la incidencia #${id}`);
-                });
-            });
-            
-            document.querySelectorAll('.btn-action.editar').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    alert(`Editar incidencia #${id}`);
-                });
-            });
-        }
-
-        // Event listeners para los botones
-        refreshBtn.addEventListener('click', mostrarIncidencias);
-        emptyRefreshBtn.addEventListener('click', mostrarIncidencias);
-        
-        createBtn.addEventListener('click', () => {
-            alert('Navegar a la página de creación de incidencias');
-            // En una app real: window.location.href = 'crear-incidencia.html';
-        });
-        
-        modifyBtn.addEventListener('click', () => {
-            alert('Seleccione una incidencia para modificar');
-        });
-        
-        mapBtn.addEventListener('click', () => {
-            alert('Navegar al mapa de incidencias');
-            // En una app real: window.location.href = 'mapa-incidencias.html';
-        });
-        
-        supportBtn.addEventListener('click', () => {
-            alert('Navegar a la página de apoyo ciudadano');
-            // En una app real: window.location.href = 'apoyo-ciudadano.html';
-        });
-        
-        logoutBtn.addEventListener('click', () => {
-            alert('Cerrando sesión...');
-            // En una app real: 
-            // sessionStorage.removeItem('usuario');
-            window.location.href = 'index.html';
+            // Función para mostrar mensajes
+            function showToaster(message) {
+                toaster.textContent = message;
+                toaster.style.display = 'block';
+                
+                setTimeout(function() {
+                    toaster.style.display = 'none';
+                }, 3000);
+            }
         });
     </script>
 </body>
