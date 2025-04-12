@@ -118,16 +118,15 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             padding: 30px;
             min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .empty-state {
             text-align: center;
             color: #777;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
         }
 
         .empty-state img {
@@ -168,235 +167,6 @@
             text-decoration: underline;
         }
 
-        /* Modal styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none; /* Cambiado de hidden a none para solucionar problemas de visibilidad */
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-overlay.active {
-            display: flex; /* Cambiado de visible a flex para asegurar que aparezca correctamente */
-        }
-
-        .modal {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        /* Form styles */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .form-col {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: var(--dark-color);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--medium-grey);
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            padding-right: 30px;
-        }
-
-        .file-upload {
-            border: 2px dashed var(--medium-grey);
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .file-upload input {
-            display: none;
-        }
-
-        .file-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .file-item {
-            width: 80px;
-            height: 80px;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid var(--medium-grey);
-        }
-
-        .file-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .remove-file {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.7);
-            width: 20px;
-            height: 20px;
-            border-radius: 0 0 0 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-            color: #e74c3c;
-        }
-
-        .modal-footer {
-            padding: 15px 20px;
-            border-top: 1px solid var(--medium-grey);
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        /* Table styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        thead tr {
-            background-color: var(--light-grey);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--medium-grey);
-        }
-
-        th {
-            font-weight: 600;
-        }
-
-        tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.02);
-        }
-
-        .status-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background-color: #FEF9C3;
-            color: #CA8A04;
-        }
-
-        .status-review {
-            background-color: #DBEAFE;
-            color: #2563EB;
-        }
-
-        .status-completed {
-            background-color: #DCFCE7;
-            color: #16A34A;
-        }
-
-        .actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .btn-action {
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            border-radius: 4px;
-        }
-
         /* Responsive styles */
         @media (max-width: 768px) {
             .button-row {
@@ -427,23 +197,6 @@
             
             .logo {
                 margin-right: 0;
-            }
-
-            .form-row {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .modal {
-                width: 95%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
             }
         }
     </style>
@@ -498,191 +251,87 @@
     <!-- Contenido principal -->
     <div class="container">
         <div class="dashboard-content" id="dashboardContent">
-            <!-- El contenido será cargado dinámicamente con JavaScript -->
-        </div>
-    </div>
-
-    <!-- Modal para crear incidencia -->
-    <div class="modal-overlay" id="createIncidenceModal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">Nueva Incidencia</div>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="incidenceForm">
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="fecha">Fecha y Hora</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha" readonly>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="ciudadano">Ciudadano</label>
-                                <input type="text" class="form-control" id="ciudadano" name="ciudadano" value="admin" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="titulo">Título de la Incidencia*</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Resumen breve de la incidencia" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="descripcion">Descripción de los Desperfectos*</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Describa detalladamente el problema detectado" required></textarea>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="categoria">Categoría*</label>
-                                <select class="form-control" id="categoria" name="categoria" required>
-                                    <option value="" disabled selected>Seleccione una categoría</option>
-                                    <option value="Mobiliario urbano">Mobiliario urbano</option>
-                                    <option value="Alumbrado">Alumbrado</option>
-                                    <option value="Aceras y calzadas">Aceras y calzadas</option>
-                                    <option value="Parques y jardines">Parques y jardines</option>
-                                    <option value="Señalización">Señalización</option>
-                                    <option value="Semáforos">Semáforos</option>
-                                    <option value="Contenedores y limpieza">Contenedores y limpieza</option>
-                                    <option value="Otros">Otros</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-col">
-                            <div class="form-group">
-                                <label for="ubicacion">Ubicación/Dirección*</label>
-                                <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Calle, número, punto de referencia..." required>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="fotos">Fotografías</label>
-                        <div class="file-upload" id="dropArea">
-                            <input type="file" id="fotos" name="fotos" multiple accept="image/*">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path>
-                                <path d="M16 5V3"></path>
-                                <path d="M16 9V7"></path>
-                                <path d="M12 5h4"></path>
-                                <path d="M12 7h4"></path>
-                                <path d="M16 3h4v4"></path>
-                                <line x1="8" y1="18" x2="10" y2="18"></line>
-                                <line x1="14" y1="18" x2="16" y2="18"></line>
-                                <line x1="10" y1="18" x2="14" y2="18"></line>
-                            </svg>
-                            <p>Haga clic o arrastre para subir fotografías</p>
-                        </div>
-                        <div class="file-preview" id="filePreview"></div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" id="cancelBtn">Cancelar</button>
-                <button class="btn btn-primary" id="submitIncidenceBtn">Enviar Incidencia</button>
+            <!-- Estado vacío inicial -->
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2"/>
+                    <path d="M7 7h10M7 12h10M7 17h4"/>
+                </svg>
+                <h3>No hay incidencias para mostrar</h3>
+                <p>Utiliza el botón "Actualizar" para cargar las incidencias disponibles o crea una nueva incidencia.</p>
+                <button class="btn btn-primary" id="emptyRefreshBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                    Actualizar ahora
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Datos de usuario actual (para el MVP)
-        const currentUser = {
-            username: 'admin',
-            nombre: 'Admin',
-            apellidos: 'Usuario',
-            email: 'admin@aleatoria.gov'
-        };
-
         // Simulación de datos de incidencias para el MVP
-        let incidencias = [
+        const incidencias = [
             { 
                 id: 1, 
                 titulo: "Banco roto en Plaza Mayor", 
                 descripcion: "Listones de madera rotos en banco número 5", 
-                categoria: "Mobiliario urbano",
                 ubicacion: "Plaza Mayor", 
-                fecha: "2025-04-10 10:15", 
+                fecha: "2025-04-10", 
                 estado: "Pendiente", 
-                reportadoPor: "admin",
-                fotos: [] 
+                reportadoPor: "admin" 
             },
             { 
                 id: 2, 
                 titulo: "Farola sin luz", 
                 descripcion: "Farola que no funciona desde hace una semana", 
-                categoria: "Alumbrado",
                 ubicacion: "Calle San Juan, 23", 
-                fecha: "2025-04-08 16:30", 
+                fecha: "2025-04-08", 
                 estado: "En revisión", 
-                reportadoPor: "admin",
-                fotos: [] 
+                reportadoPor: "admin" 
             },
             { 
                 id: 3, 
                 titulo: "Papelera vandalizada", 
                 descripcion: "Papelera con pintadas y parcialmente arrancada", 
-                categoria: "Contenedores y limpieza",
                 ubicacion: "Parque Central, zona norte", 
-                fecha: "2025-04-11 08:45", 
+                fecha: "2025-04-11", 
                 estado: "Pendiente", 
-                reportadoPor: "vecino1",
-                fotos: [] 
+                reportadoPor: "vecino1" 
             }
         ];
 
-        // Función para mostrar el estado vacío
-        function mostrarEstadoVacio() {
-            dashboardContent.innerHTML = `
-                <div class="empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="18" height="18" x="3" y="3" rx="2"/>
-                        <path d="M7 7h10M7 12h10M7 17h4"/>
-                    </svg>
-                    <h3>No hay incidencias para mostrar</h3>
-                    <p>Utiliza el botón "Actualizar" para cargar las incidencias disponibles o crea una nueva incidencia.</p>
-                    <button class="btn btn-primary" id="emptyRefreshBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
-                        </svg>
-                        Actualizar ahora
-                    </button>
-                </div>
-            `;
-            
-            // Añadir evento al botón de actualizar
-            document.getElementById('emptyRefreshBtn').addEventListener('click', mostrarIncidencias);
-        }
+        // Variables para el DOM
+        const dashboardContent = document.getElementById('dashboardContent');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const emptyRefreshBtn = document.getElementById('emptyRefreshBtn');
+        const createBtn = document.getElementById('createBtn');
+        const modifyBtn = document.getElementById('modifyBtn');
+        const mapBtn = document.getElementById('mapBtn');
+        const supportBtn = document.getElementById('supportBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
 
         // Función para mostrar las incidencias
         function mostrarIncidencias() {
-            // Si no hay incidencias, mostrar el estado vacío
-            if (incidencias.length === 0) {
-                mostrarEstadoVacio();
-                return;
-            }
-            
             // Limpiamos el contenido actual
             dashboardContent.innerHTML = '';
             
             // Creamos la tabla para mostrar las incidencias
             const table = document.createElement('table');
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            table.style.marginTop = '20px';
             
             // Creamos el encabezado de la tabla
             const thead = document.createElement('thead');
             thead.innerHTML = `
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Categoría</th>
-                    <th>Ubicación</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                <tr style="background-color: var(--light-grey);">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">ID</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Título</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Ubicación</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Fecha</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Estado</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--medium-grey);">Acciones</th>
                 </tr>
             `;
             table.appendChild(thead);
@@ -694,26 +343,29 @@
             incidencias.forEach(incidencia => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${incidencia.id}</td>
-                    <td>${incidencia.titulo}</td>
-                    <td>${incidencia.categoria || '-'}</td>
-                    <td>${incidencia.ubicacion}</td>
-                    <td>${incidencia.fecha}</td>
-                    <td>
-                        <span class="status-badge ${
-                            incidencia.estado === 'Pendiente' ? 'status-pending' : 
-                            incidencia.estado === 'En revisión' ? 'status-review' : 
-                            incidencia.estado === 'Completada' ? 'status-completed' : ''
-                        }">${incidencia.estado}</span>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.id}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.titulo}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.ubicacion}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">${incidencia.fecha}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">
+                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; background-color: ${
+                            incidencia.estado === 'Pendiente' ? '#FEF9C3' : 
+                            incidencia.estado === 'En revisión' ? '#DBEAFE' : 
+                            incidencia.estado === 'Completada' ? '#DCFCE7' : '#F3F4F6'
+                        }; color: ${
+                            incidencia.estado === 'Pendiente' ? '#CA8A04' : 
+                            incidencia.estado === 'En revisión' ? '#2563EB' : 
+                            incidencia.estado === 'Completada' ? '#16A34A' : '#4B5563'
+                        };">${incidencia.estado}</span>
                     </td>
-                    <td class="actions">
-                        <button class="btn-action ver" data-id="${incidencia.id}" title="Ver detalles">
+                    <td style="padding: 12px; border-bottom: 1px solid var(--medium-grey);">
+                        <button class="btn-action ver" data-id="${incidencia.id}" style="background: none; border: none; color: #3498db; cursor: pointer; margin-right: 5px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
                         </button>
-                        <button class="btn-action editar" data-id="${incidencia.id}" title="Editar">
+                        <button class="btn-action editar" data-id="${incidencia.id}" style="background: none; border: none; color: #f39c12; cursor: pointer; margin-right: 5px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
                             </svg>
@@ -742,221 +394,34 @@
             });
         }
 
-        // Función para obtener la fecha y hora actual en Madrid, España
-        function obtenerFechaHoraMadrid() {
-            const now = new Date();
-            const options = { 
-                timeZone: 'Europe/Madrid',
-                year: 'numeric', 
-                month: '2-digit', 
-                day: '2-digit',
-                hour: '2-digit', 
-                minute: '2-digit'
-            };
-            return new Intl.DateTimeFormat('es-ES', options).format(now);
-        }
-
-        // Función para mostrar el modal de creación de incidencia
-        function mostrarModalCrearIncidencia() {
-            // Establecer la fecha y hora actual
-            document.getElementById('fecha').value = obtenerFechaHoraMadrid();
-            
-            // Establecer el nombre del ciudadano
-            document.getElementById('ciudadano').value = currentUser.username;
-            
-            // Limpiar el resto del formulario
-            document.getElementById('titulo').value = '';
-            document.getElementById('descripcion').value = '';
-            document.getElementById('categoria').selectedIndex = 0;
-            document.getElementById('ubicacion').value = '';
-            
-            // Limpiar la previsualización de archivos
-            filePreview.innerHTML = '';
-            selectedFiles = [];
-            
-            // Mostrar el modal
-            document.getElementById('createIncidenceModal').classList.add('active');
-        }
-
-        // Función para cerrar el modal
-        function cerrarModal() {
-            document.getElementById('createIncidenceModal').classList.remove('active');
-        }
-
-        // Función para previsualizar archivos
-        function previewFiles(files) {
-            // Limitar a 5 archivos
-            const filesToProcess = Array.from(files).slice(0, 5);
-            
-            // Añadir a la lista de archivos seleccionados
-            selectedFiles = [...selectedFiles, ...filesToProcess];
-            
-            // Limitar a 5 archivos en total
-            if (selectedFiles.length > 5) {
-                selectedFiles = selectedFiles.slice(0, 5);
-                alert('Solo se permiten un máximo de 5 fotografías');
-            }
-            
-            // Limpiar la previsualización
-            filePreview.innerHTML = '';
-            
-            // Crear la previsualización para cada archivo
-            selectedFiles.forEach((file, index) => {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const fileItem = document.createElement('div');
-                    fileItem.className = 'file-item';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.alt = file.name;
-                    
-                    const removeBtn = document.createElement('div');
-                    removeBtn.className = 'remove-file';
-                    removeBtn.innerHTML = '&times;';
-                    removeBtn.setAttribute('data-index', index);
-                    removeBtn.addEventListener('click', function() {
-                        const index = parseInt(this.getAttribute('data-index'));
-                        selectedFiles.splice(index, 1);
-                        previewFiles([]);  // Actualizar la previsualización
-                    });
-                    
-                    fileItem.appendChild(img);
-                    fileItem.appendChild(removeBtn);
-                    filePreview.appendChild(fileItem);
-                };
-                
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // Función para crear una nueva incidencia
-        function crearIncidencia(e) {
-            e.preventDefault();
-            
-            // Validar el formulario
-            const titulo = document.getElementById('titulo').value;
-            const descripcion = document.getElementById('descripcion').value;
-            const categoria = document.getElementById('categoria').value;
-            const ubicacion = document.getElementById('ubicacion').value;
-            
-            if (!titulo || !descripcion || !categoria || !ubicacion) {
-                alert('Por favor, complete todos los campos obligatorios');
-                return;
-            }
-            
-            // Crear una nueva incidencia
-            const nuevaIncidencia = {
-                id: incidencias.length > 0 ? Math.max(...incidencias.map(inc => inc.id)) + 1 : 1,
-                titulo: titulo,
-                descripcion: descripcion,
-                categoria: categoria,
-                ubicacion: ubicacion,
-                fecha: document.getElementById('fecha').value,
-                estado: 'Pendiente',
-                reportadoPor: currentUser.username,
-                fotos: selectedFiles.map(file => file.name)  // En un entorno real, aquí se guardarían las URLs a las imágenes subidas
-            };
-            
-            // Añadir la incidencia a la lista
-            incidencias.push(nuevaIncidencia);
-            
-            // Cerrar el modal
-            cerrarModal();
-            
-            // Mostrar las incidencias actualizadas
-            mostrarIncidencias();
-            
-            // Mostrar mensaje de éxito
-            alert('Incidencia creada con éxito');
-        }
-
-        // Array para almacenar los archivos seleccionados
-        let selectedFiles = [];
-
-        // Esperar a que el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener referencias a los elementos del DOM
-            const dashboardContent = document.getElementById('dashboardContent');
-            const refreshBtn = document.getElementById('refreshBtn');
-            const createBtn = document.getElementById('createBtn');
-            const modifyBtn = document.getElementById('modifyBtn');
-            const mapBtn = document.getElementById('mapBtn');
-            const supportBtn = document.getElementById('supportBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            
-            const createIncidenceModal = document.getElementById('createIncidenceModal');
-            const closeModal = document.getElementById('closeModal');
-            const cancelBtn = document.getElementById('cancelBtn');
-            const submitIncidenceBtn = document.getElementById('submitIncidenceBtn');
-            const fileInput = document.getElementById('fotos');
-            const dropArea = document.getElementById('dropArea');
-            const filePreview = document.getElementById('filePreview');
-
-            // Mostrar el estado inicial (vacío)
-            mostrarEstadoVacio();
-            
-            // Configurar eventos de los botones
-            refreshBtn.addEventListener('click', mostrarIncidencias);
-            
-            createBtn.addEventListener('click', function() {
-                mostrarModalCrearIncidencia();
-            });
-            
-            modifyBtn.addEventListener('click', function() {
-                alert('Seleccione una incidencia para modificar');
-            });
-            
-            mapBtn.addEventListener('click', function() {
-                alert('Navegar al mapa de incidencias');
-            });
-            
-            supportBtn.addEventListener('click', function() {
-                alert('Navegar a la página de apoyo ciudadano');
-            });
-            
-            logoutBtn.addEventListener('click', function() {
-                alert('Cerrando sesión...');
-                window.location.href = 'index.html';
-            });
-            
-            // Configurar eventos del modal
-            closeModal.addEventListener('click', cerrarModal);
-            cancelBtn.addEventListener('click', cerrarModal);
-            submitIncidenceBtn.addEventListener('click', crearIncidencia);
-            
-            // Manejo de clicks dentro y fuera del modal
-            createIncidenceModal.addEventListener('click', function(e) {
-                if (e.target === createIncidenceModal) {
-                    cerrarModal();
-                }
-            });
-            
-            // Manejo de archivos
-            fileInput.addEventListener('change', function() {
-                previewFiles(this.files);
-            });
-            
-            // Drag and drop para los archivos
-            dropArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '#2C8B89';
-            });
-            
-            dropArea.addEventListener('dragleave', function() {
-                this.style.borderColor = '';
-            });
-            
-            dropArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '';
-                previewFiles(e.dataTransfer.files);
-            });
-            
-            dropArea.addEventListener('click', function() {
-                fileInput.click();
-            });
+        // Event listeners para los botones
+        refreshBtn.addEventListener('click', mostrarIncidencias);
+        emptyRefreshBtn.addEventListener('click', mostrarIncidencias);
+        
+        createBtn.addEventListener('click', () => {
+            alert('Navegar a la página de creación de incidencias');
+            // En una app real: window.location.href = 'crear-incidencia.html';
+        });
+        
+        modifyBtn.addEventListener('click', () => {
+            alert('Seleccione una incidencia para modificar');
+        });
+        
+        mapBtn.addEventListener('click', () => {
+            alert('Navegar al mapa de incidencias');
+            // En una app real: window.location.href = 'mapa-incidencias.html';
+        });
+        
+        supportBtn.addEventListener('click', () => {
+            alert('Navegar a la página de apoyo ciudadano');
+            // En una app real: window.location.href = 'apoyo-ciudadano.html';
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            alert('Cerrando sesión...');
+            // En una app real: 
+            // sessionStorage.removeItem('usuario');
+            window.location.href = 'index.html';
         });
     </script>
 </body>
