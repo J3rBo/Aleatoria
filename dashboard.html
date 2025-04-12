@@ -498,36 +498,6 @@ function mostrarIncidencias() {
         });
     });
 }
-
-        // Event listeners para los botones
-        refreshBtn.addEventListener('click', mostrarIncidencias);
-        emptyRefreshBtn.addEventListener('click', mostrarIncidencias);
-        
-        createBtn.addEventListener('click', () => {
-            alert('Navegar a la página de creación de incidencias');
-            // En una app real: window.location.href = 'crear-incidencia.html';
-        });
-        
-        modifyBtn.addEventListener('click', () => {
-            alert('Seleccione una incidencia para modificar');
-        });
-        
-        mapBtn.addEventListener('click', () => {
-            alert('Navegar al mapa de incidencias');
-            // En una app real: window.location.href = 'mapa-incidencias.html';
-        });
-        
-        supportBtn.addEventListener('click', () => {
-            alert('Navegar a la página de apoyo ciudadano');
-            // En una app real: window.location.href = 'apoyo-ciudadano.html';
-        });
-        
-        logoutBtn.addEventListener('click', () => {
-            alert('Cerrando sesión...');
-            // En una app real: 
-            // sessionStorage.removeItem('usuario');
-            window.location.href = 'index.html';
-        });
     </script>
 </body>
 </html>
